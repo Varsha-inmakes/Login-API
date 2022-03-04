@@ -1,70 +1,68 @@
-import { View, Text, TextInput, Button, StyleSheet,TouchableHighlight, Alert } from 'react-native'
+import { View, Text, TextInput,StyleSheet,TouchableHighlight } from 'react-native'
 import React, { useState } from 'react'
 
-export default function Login({navigation}) {
-  const[emailorphonenumber, setemailorphonenumber] = useState(null);
-  const [password, setpassword] = useState(null);
+export default function Password() {
+  const [emailorphonenumber , setemailorphonenumber] = useState(null)
+  const [Cpassword , setCpassword] = useState(null)
 
-
-  Login =()=>{
-    if(emailorphonenumber && password){
-      fetch('https://api.oopacks.com/api/test/login',{
-        method: 'POST',
+  Password =()=>{
+    if(emailorphonenumber && Cpassword ){
+      fetch('https://api.oopacks.com/api/test/forgotpassword',{
+        method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           emailorphonenumber: emailorphonenumber,
-          password: password
+          password: Cpassword,
         })
       })
       .then((response) => response.json())
       .then((response) => {
-        console.log('Response Login',response)
-        Alert.alert('Login successfully')
-        navigation.navigate('Home')
+        console.log('Response Password',response)
+        // Alert.alert('Password Updated successfully')
       })
       .catch((error)=> {
         console.log('Login error',error)
       })
-    
+      
+      console.log(Cpassword);
+      console.log(emailorphonenumber)
     } else {
-      console.log('Login error')
-      Alert.alert('username or password incorrect')
+      console.log('Password error')
+      
     }
     
   }
-
+  
   return (
+         
     <View style={styles.container}>
     <View style={{width:'100%',height:'20%',alignItems:'center',justifyContent:'center'}}>
-      <Text style={{color:'#ffff',fontSize:30,alignItems:'center',justifyContent:'center'}}>OOPACKS</Text>
+      <Text style={{color:'#ffff',fontSize:30,alignItems:'center',justifyContent:'center'}}>Sign Up</Text>
     </View>
     <View style={styles.View1}>
-    <Text style={{color:'#000',fontSize:25,alignItems:'center',marginBottom:55}}>Login</Text>
       <TextInput 
-      placeholder="Email or Mobile Number"
+      placeholder="Email or Mobile number"
       style={styles.input}
-      onChangeText={(email) => setemailorphonenumber(email)}
+      onChangeText={(Email) => setemailorphonenumber(Email)}
       />
       <TextInput
-      placeholder="Password"
+      placeholder="Conform Password"
       style={styles.input}
-      onChangeText={(Tpassword) => setpassword(Tpassword)}
+      onChangeText={(Cpass) => setCpassword(Cpass)}
       secureTextEntry
       underlineColorAndroid='#fff'
       />
      
     </View>
-      <TouchableHighlight onPress={()=>Login()} style={{width:'100%',height:'15%',backgroundColor:'#f2f2f2',alignItems:'center'}}>
+      <TouchableHighlight onPress={()=>Password()} style={{width:'100%',height:'15%',backgroundColor:'#f2f2f2',alignItems:'center'}}>
         <View style={{backgroundColor:'#000',height:45,width:'80%',alignItems:'center',justifyContent:'center',borderRadius:5}}>
-          <Text style={{color:'#fff',fontSize:15}}>Login</Text>
+          <Text style={{color:'#fff',fontSize:15}}>Sign Up</Text>
         </View>
       </TouchableHighlight>
-      <View style={{width:'100%',height:'5%',backgroundColor:'#f2f2f2',justifyContent:'center',alignItems:'center'}}>
-        <Text onPress ={()=>navigation.navigate('Register')} style={{color:'#000'}}>You have a account? Signup</Text>
-      </View>
+     
     </View> 
   )
 }

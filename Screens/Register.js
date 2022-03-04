@@ -43,6 +43,10 @@ export default function Registers ({navigation}) {
     
   }
 
+  validation =() =>{
+    
+  }
+
   return (
         
     <View style={styles.container}>
@@ -51,7 +55,7 @@ export default function Registers ({navigation}) {
     </View>
     <View style={styles.View1}>
       <TextInput 
-      placeholder="Email or Mobile Number"
+      placeholder="Email Id"
       style={styles.input}
       onChangeText={(email) => setemailorphonenumber(email)}
       />
